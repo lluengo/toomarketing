@@ -1,0 +1,101 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<BE.Bitacora>
+
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/autocomplete.css" rel="stylesheet" />
+
+<h2>@etiquetas["Bitacora"].ToString()</h2>
+<br />
+
+@using (Html.BeginForm("Index", "Bitacora", FormMethod.Get))
+{
+<p>
+    @Html.TextBox("filtroUsuario", ViewBag.CurrentFilter as string, new { @class = "form-control text-box single-line", autocomplete = "off", placeholder = "Usuario", style = "width:200px; display: inline-block;" })
+    @Html.TextBox("filtroFechaDesde", ViewBag.DesdeDateFilter as string, new { @class = "form-control text-box single-line", autocomplete = "off", placeholder = "Fecha Desde", style = "width:150px; display: inline-block;" })
+    @Html.TextBox("filtroFechaHasta", ViewBag.HastaDateFilter as string, new { @class = "form-control text-box single-line", autocomplete = "off", placeholder = "Fecha Hasta", style = "width:150px; display: inline-block;" })
+   @Html.DropDownList("filtroMensaje", (IEnumerable<SelectListItem>)ViewBag.Msg, null, htmlAttributes: new { @class = "form-control single-line", style = "width:150px; display: inline-block;" })
+    <input type="submit" value=@etiquetas["Buscar"].ToString() class="btn btn-info" />
+</p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @etiquetas["Fecha"].ToString()
+        </th>
+        <th>
+           @etiquetas["Mensaje"].ToString()
+        </th>
+        <th>
+           @etiquetas["Usuario"].ToString()
+        </th>
+        <th>
+            @etiquetas["Tipo"].ToString()
+        </th>
+     
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mensaje)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo)
+        </td>
+
+    </tr>
+}
+
+</table>
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, currentFilterFechaDesde = ViewBag.CurrentFechaDesde, currentFilterFechaHasta = ViewBag.CurrentFechaHasta, currentFilterMensaje = ViewBag.CurrentMensaje }))
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $("#filtroUsuario").autocomplete({
+            autoSelect: true,
+            autoFocus: true,
+            minLength: 3,
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("GetUsuarios", "Bitacora")',
+                    datatype: "json",
+                    data: { Areas: '', term: request.term },
+                    success: function (data) {
+                        response($.map(data, function (val, item) {
+                            return { label: val.usuario, value: val.usuario, Id: val.ID };
+                        }));
+                    }
+                });
+            },
+            select: function (event, ui) {
+                $("#filtroUsuario").val(ui.item.Name);
+            }
+
+        });
+
+        $("#filtroFechaDesde").datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
+
+        $("#filtroFechaHasta").datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
+    </script>
+
+}
+

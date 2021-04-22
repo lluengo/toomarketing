@@ -1,0 +1,82 @@
+﻿@model BE.Cliente
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<h2>@etiquetas["Detalle"].ToString()</h2>
+
+<div>
+    <h4>@etiquetas["Clientes"].ToString()</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @etiquetas["Nombre"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @etiquetas["Apellido"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dni)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dni)
+        </dd>
+
+        <dt>
+            @etiquetas["Fecha_Nacimiento"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaNacimiento)
+        </dd>
+
+        <dt>
+            @etiquetas["Direccion"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+
+        <dt>
+            @etiquetas["Fumador"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EsFumador)
+        </dd>
+
+        <dt>
+            @etiquetas["Riesgo"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActividadesRiesgo)
+        </dd>
+        <dt>
+            @etiquetas["Usuario"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.usuario)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(etiquetas["Editar"].ToString(), "Edit", new { id = Model.Id }) |
+    @Html.ActionLink(etiquetas["Volver"].ToString(), "Index")
+</p>

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<BE.Permiso>
+
+@{
+    ViewBag.Title = "Patentes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<h2>@etiquetas["Patentes"].ToString()</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @etiquetas["Nombre"].ToString()
+        </th>
+        <th>
+            @etiquetas["Tipo"].ToString()
+        </th>
+        
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            
+        </tr>
+    }
+
+</table>

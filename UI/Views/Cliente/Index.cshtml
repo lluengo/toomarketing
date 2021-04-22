@@ -1,0 +1,101 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<BE.Cliente>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+@{
+    ViewBag.Title = "Clientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<h2>@etiquetas["Clientes"].ToString()</h2>
+
+<p>
+    @Html.ActionLink(etiquetas["Crear"].ToString(), "Create")
+    <div style="float:right;margin-top: -20px; padding-bottom: 5px;">
+        <button title="PDF" onclick="generarPdf();"><i class="fa fa-file-pdf-o" style="font-size:24px;color:red"></i></button>
+        <button title="Excel" onclick="generarExcel();"><i class="fa fa-file-excel-o" style="font-size:24px;color:green"></i></button>
+    </div>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @etiquetas["Nombre"].ToString()
+        </th>
+        <th>
+        @etiquetas["Apellido"].ToString()
+        </th>
+        <th>
+            DNI
+        </th>
+        <th>
+           @etiquetas["Fecha_Nacimiento"].ToString()
+        </th>
+        <th>
+           @etiquetas["Direccion"].ToString()
+        </th>
+        <th>
+            @etiquetas["Fumador"].ToString()
+        </th>
+        <th>
+            @etiquetas["Riesgo"].ToString()
+        </th>
+        <th>
+            @etiquetas["Zonas"].ToString()
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dni)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaNacimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EsFumador)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActividadesRiesgo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Zona.Descripcion)
+        </td>
+        <td>
+            @Html.ActionLink(etiquetas["Editar"].ToString(), "Edit", new { id=item.Id }) |
+            @Html.ActionLink(etiquetas["Detalle"].ToString(), "Details", new { id=item.Id }) |
+            @Html.ActionLink(etiquetas["Eliminar"].ToString(), "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    <script>
+        function generarPdf() {
+            window.open('/Cliente/Reporte', '_blank');
+        }
+
+        function generarExcel() {
+            location.href = '/Cliente/Excel';
+        }
+    </script>
+
+}

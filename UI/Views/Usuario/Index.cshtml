@@ -1,0 +1,77 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<BE.Usuario>
+
+@{
+    ViewBag.Title = "Index";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<h2>@etiquetas["Usuarios"].ToString()</h2>
+
+<p>
+    @Html.ActionLink(etiquetas["Crear"].ToString(), "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           @etiquetas["Usuario"].ToString()
+        </th>
+        <th>
+            @etiquetas["Estado"].ToString()
+        </th>
+        
+        <th>
+            @etiquetas["Nombre"].ToString()
+        </th>
+        <th>
+            @etiquetas["Apellido"].ToString()
+        </th>
+        <th>
+            @etiquetas["Correo"].ToString()
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado)
+        </td>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.correo)
+        </td>
+       
+        <td>
+            @Html.ActionLink(etiquetas["Editar"].ToString(), "Edit", new { id = item.ID }) |
+            @Html.ActionLink(etiquetas["Detalle"].ToString(), "Details", new { id = item.ID }) |
+            @if (!item.estado.Equals("Activo"))
+            {
+            @Html.ActionLink(etiquetas["Activar"].ToString(), "Activar", new { id = item.ID }) 
+            } else { 
+
+                @Html.ActionLink(etiquetas["Desactivar"].ToString(), "Desactivar", new { id = item.ID })
+            }
+            |@Html.ActionLink(etiquetas["Permisos"].ToString(), "../Permiso/Usuario", new { id = item.ID })
+
+            
+           
+        </td>
+    </tr>
+}
+
+</table>
+ Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort }))
+
+

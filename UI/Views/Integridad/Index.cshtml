@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Integridad";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<h2>@etiquetas["Integridad"].ToString()</h2>
+
+<div class="row">
+    <div class="col-md-8">
+       
+            <form action="/Integridad/Recalcular" class="form-horizontal" method="post">
+                <hr>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value=@etiquetas["Recalcular"].ToString() class="btn btn-default">
+                       
+                    </div>
+                </div>
+                <p style="font-weight:bold; color:red"> @ViewBag.mensaje</p>
+            </form>
+   
+
+    </div>
+
+</div>
+

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BE.Permiso>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<h2>@etiquetas["Detalle"].ToString()</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @etiquetas["Nombre"].ToString()
+        </th>
+        <th>
+            @etiquetas["Tipo"].ToString()
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.ActionLink(etiquetas["Editar"].ToString(), "Edit", new { id = item.ID }) |
+                @Html.ActionLink(etiquetas["Detalle"].ToString(), "Details", new { id = item.ID }) |
+                @Html.ActionLink(etiquetas["Eliminar"].ToString(), "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

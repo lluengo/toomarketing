@@ -1,0 +1,63 @@
+﻿@model BE.Usuario
+
+@{
+    ViewBag.Title = "Detalle";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<h2>@etiquetas["Detalle"].ToString()</h2>
+
+<div>
+    <h4>@etiquetas["Usuario"].ToString()</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @etiquetas["Usuario"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario)
+        </dd>
+
+        <dt>
+            @etiquetas["Estado"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+       
+
+        <dt>
+            @etiquetas["Nombre"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+           @etiquetas["Apellido"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.apellido)
+        </dd>
+
+        <dt>
+            @etiquetas["Correo"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.correo)
+        </dd>
+
+        
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(etiquetas["Editar"].ToString(), "Edit", new { id = Model.ID }) |
+    @Html.ActionLink(etiquetas["Volver"].ToString(), "Index")
+</p>

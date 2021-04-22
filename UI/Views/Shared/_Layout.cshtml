@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+@{
+    var idiomas = (List<BE.Idioma>)Session["Idiomas"];
+    var usuario = (BE.Usuario)Session["usuario"];
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - TooMarketing</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                   
+                    
+                    @if (Session["usuario"] != null)
+                    {
+
+                        @Html.ActionLink("TooMarketing", etiquetas["Bienvenido"].ToString(), "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        List<string> lista = (List<string>)Session["permisos"];
+                        foreach (string item in lista)
+                        {
+                            if (item == "Cliente")
+                            {
+                         <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@etiquetas["Clientes"].ToString() <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>Promociones</li>
+                                <li>Publicidades</li>
+                                <li>Segmentación</li>
+                                
+                            </ul>
+                        </li>
+                        
+                            }
+                            else if (item == "Administrador")
+                            {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ABM <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                
+                                <li>@Html.ActionLink(etiquetas["Clientes"].ToString(), "Index", "Cliente", new { area = "" }, new { })</li>
+                            </ul>
+
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@etiquetas["Administracion"].ToString() <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink(etiquetas["Usuarios"].ToString(), "Index", "Usuario", new { area = "" }, new { })</li>
+                                <li>@Html.ActionLink(etiquetas["Permisos"].ToString(), "Index", "Permiso", new { area = "" }, new { })</li>
+                                <li>@Html.ActionLink(etiquetas["Resguardo"].ToString(), "Index", "Resguardo", new { area = "" }, new { })</li>
+                                <li>@Html.ActionLink(etiquetas["Bitacora"].ToString(), "Index", "Bitacora", new { area = "" }, new { })</li>
+                                <li>@Html.ActionLink(etiquetas["Integridad"].ToString(), "Index", "Integridad", new { area = "" }, new { })</li>
+                                <li>@Html.ActionLink(etiquetas["Idiomas"].ToString(), "Index", "Idioma", new { area = "" }, new { })</li>
+                            </ul>
+                        </li>
+                            }
+
+                    
+                        }
+                    }
+
+                </ul>
+                @if (Session["usuario"] != null)
+                {
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@etiquetas["Cambiar_Idioma"].ToString()<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @{
+                                foreach (BE.Idioma idioma in idiomas)
+                                {
+                                    <li>@Html.ActionLink(idioma.Descripcion, "CambiarIdioma", "Usuario", new { id_idioma = idioma.Id, id_usuario = usuario.ID }, null)</li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink(usuario.usuario, "../Usuario/MisDatos", "Login", routeValues: null, htmlAttributes: new { })</li>  
+                    <li>@Html.ActionLink(etiquetas["Cerrar_Sesion"].ToString(), "LogOut", "Login", routeValues: null, htmlAttributes: new { })</li>  
+                </ul>
+                }
+                     else
+                     {
+                 
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Registrarse", "Create", "Usuario", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Iniciar sesión", "Index", "Login", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                </ul>
+                     }
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - TFI - Leonel Luengo</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

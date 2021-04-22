@@ -1,0 +1,148 @@
+﻿@model IEnumerable<BE.Permiso>
+
+@{
+    ViewBag.Title = "Asignar";
+    var usuario = (BE.Usuario)ViewData["usuario"];
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<h2>@etiquetas["Asignar"].ToString()</h2>
+
+<h4>@etiquetas["Usuario"].ToString()</h4>
+
+<table class="table">
+    <tr>
+        
+        <th>
+            <label>@etiquetas["Usuario"].ToString()</label>
+        </th>
+        <th>
+            <label>@etiquetas["Nombre"].ToString()</label>
+        </th>
+        <th>
+            <label>@etiquetas["Apellido"].ToString()</label>
+        </th>
+        <th>
+            <label>@etiquetas["Correo"].ToString()</label>
+        </th>
+
+    </tr>
+
+    <tr>
+      
+        <td>
+            @Html.DisplayFor(modelItem => @usuario.usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => @usuario.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => @usuario.apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => @usuario.correo)
+        </td>
+    </tr>
+</table>
+
+<div class="form-group">
+    <label class="control-label col-md-2">@etiquetas["Permisos"].ToString()</label>
+    <br />
+    <div class="col-md-10">
+        @Html.DropDownList("Permisos", (IEnumerable<SelectListItem>)ViewBag.lista_permisos, new { @class = "form-control" })
+        <input type="button" id="AddButton" value=@etiquetas["Agregar"].ToString() class="form-control col-md-2" onclick="add();" />
+        <input type="button" class="form-control col-md-2" value=@etiquetas["Limpiar"].ToString() onclick="location.href='@Url.Action("Asignar", "Permiso", new { id = usuario.ID})'" />
+    </div>
+    <br /><br /><br />
+    <div class="form-group">
+
+    </div>
+</div>
+<div class="form-group">
+    <table id="tabla" class="display" style="width: 400px;">
+        <thead>
+            <tr>
+                <th>@etiquetas["Permisos"].ToString()</th>
+                <th>@etiquetas["Tipo"].ToString()</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="button" value="Asignar" class="btn btn-default" onclick="create();" />
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        var tabla = $('#tabla').DataTable({
+            "dom": 'lrtip',
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false,
+            "bAutoWidth": true,
+            columns: [
+                { data: 'Nombre' },
+                { data: 'Tipo' },
+
+            ],
+        });
+    });
+        function add() {
+            var permisoId = $("#Permisos").val();
+            if (permisoId == null) { return;}
+        var data = {
+            permiso: permisoId
+        }
+        $.ajax({
+            method: "POST",
+            url: "@Url.Action("GetPermiso", "Permiso")",
+            data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        }).done(function (response) {
+            var valor = { id: response.ID, Nombre: response.Nombre, Tipo : response.Tipo };
+        var t = $('#tabla').DataTable();
+        t.row.add(valor).draw();
+        $("#Permisos option[value='" + permisoId + "']").remove();
+    });
+    }
+
+    function create() {
+        var tabla_aux = $('#tabla').DataTable().rows().data().toArray();
+        var permisos = new Array();
+        var datos;
+        for (i = 0; i < tabla_aux.length; i++){
+            datos = { id: tabla_aux[i].id, monto: tabla_aux[i].monto }
+            permisos.push(datos);
+        }
+
+        var data = {
+            permisos: permisos,
+            usuario: @usuario.ID
+        }
+
+        $.ajax({
+            method: "POST",
+            url: "@Url.Action("AsignarPermiso", "Permiso")",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                window.location = "/Usuario";
+            },
+            error: function () {
+                alert("Error de asignacion")
+            }
+        })
+        .done(function (response) {
+    });
+    }
+    </script>
+}
