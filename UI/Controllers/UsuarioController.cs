@@ -193,8 +193,6 @@ namespace UI.Controllers
         [HttpPost]
         public ActionResult CambiarContrasena(Usuario usuario)
         {
-
-
             Usuario user = bll.Listar(usuario.ID);
             user.password = usuario.password;
             try

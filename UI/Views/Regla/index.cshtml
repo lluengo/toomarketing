@@ -1,0 +1,58 @@
+﻿
+@model IEnumerable<BE.Idioma>
+
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<h2>Reglas</h2>
+
+<p>
+    Crear
+</p>
+<table class="table">
+    <tr>
+        <th>Nombre</th>
+        <th>Condición</th>
+        <th>Acción</th>
+
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>Regla1</td>
+        <td>Condición necesaria 1</td>
+        <td>Dividir todo</td>
+        <td>
+            @Html.ActionLink(etiquetas["Editar"].ToString(), "Edit", new { id = 1 }) |
+            @Html.ActionLink(etiquetas["Detalle"].ToString(), "Details", new { id = 1}) |
+            @Html.ActionLink(etiquetas["Eliminar"].ToString(), "Delete", new { id = 1 })
+        </td>
+    </tr>
+    
+    <tr>
+        <td>Regla1</td>
+        <td>Condición necesaria 2</td>
+        <td>Sumar total</td>
+        <td>
+            @Html.ActionLink(etiquetas["Editar"].ToString(), "Edit", new { id = 1 }) |
+            @Html.ActionLink(etiquetas["Detalle"].ToString(), "Details", new { id = 1 }) |
+            @Html.ActionLink(etiquetas["Eliminar"].ToString(), "Delete", new { id = 1 })
+        </td>
+    </tr>
+    
+    <tr>
+        <td>Regla3</td>
+        <td>Condición necesaria 3</td>
+        <td>Multiplicar x 20</td>
+        <td>
+            @Html.ActionLink(etiquetas["Editar"].ToString(), "Edit", new { id = 1 }) |
+            @Html.ActionLink(etiquetas["Detalle"].ToString(), "Details", new { id = 1 }) |
+            @Html.ActionLink(etiquetas["Eliminar"].ToString(), "Delete", new { id = 1 })
+        </td>
+    </tr>
+    
+
+</table>

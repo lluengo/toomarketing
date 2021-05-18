@@ -71,24 +71,6 @@ namespace UI.Controllers
                 string dvvUsuarioTabla = bllUsuario.getDVV();
                 if (dvvUsuarioTabla.Equals(dvv))
                 {
-                    if(permisos_usuario.Contains("Cliente")) 
-                    {
-                        //buscar el cliente
-                        Cliente c = clienteBLL.ListarPorUsuario(u.ID);
-                        if (c != null)
-                        {
-                            Session["cliente"] = c;
-                            return RedirectToAction("Index", "Poliza");
-                        }
-                        else {
-                            Session["usuario"] = null;
-                            Session["permisos"] = null;
-                            ViewBag.mensaje = "Error en los permisos";
-                            return View("Index");
-                        }
-
-                    }
-                    //Redireccion segun usuario
                     return RedirectToAction("Bienvenido", "Home");
                 }
                 else

@@ -176,6 +176,7 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\GenericController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReglaController.cs" />
     <Compile Include="Controllers\IdiomaController.cs" />
     <Compile Include="Controllers\IntegridadController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -273,6 +274,7 @@
     <Content Include="Views\Home\Bienvenido.cshtml" />
     <Content Include="Views\Login\OlvidoContrasena.cshtml" />
     <Content Include="Views\Idioma\TranslationError.cshtml" />
+    <Content Include="Views\Regla\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

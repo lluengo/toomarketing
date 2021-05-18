@@ -50,26 +50,46 @@
                             }
                             else if (item == "Administrador")
                             {
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ABM <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
+                  
+
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@etiquetas["Administracion"].ToString() <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink(etiquetas["Usuarios"].ToString(), "Index", "Usuario", new { area = "" }, new { })</li>
+                                        <li>@Html.ActionLink(etiquetas["Permisos"].ToString(), "Index", "Permiso", new { area = "" }, new { })</li>
+                                        <li>@Html.ActionLink(etiquetas["Resguardo"].ToString(), "Index", "Resguardo", new { area = "" }, new { })</li>
+                                        <li>@Html.ActionLink(etiquetas["Bitacora"].ToString(), "Index", "Bitacora", new { area = "" }, new { })</li>
+                                        <li>@Html.ActionLink(etiquetas["Integridad"].ToString(), "Index", "Integridad", new { area = "" }, new { })</li>
+                                        <li>@Html.ActionLink(etiquetas["Idiomas"].ToString(), "Index", "Idioma", new { area = "" }, new { })</li>
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ventas <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
                                 
-                                <li>@Html.ActionLink(etiquetas["Clientes"].ToString(), "Index", "Cliente", new { area = "" }, new { })</li>
-                            </ul>
+                                        <li>@Html.ActionLink(etiquetas["Clientes"].ToString(), "Index", "Cliente", new { area = "" }, new { })</li>
+                                    </ul>
 
-                        </li>
+                                </li>
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@etiquetas["Administracion"].ToString() <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li>@Html.ActionLink(etiquetas["Usuarios"].ToString(), "Index", "Usuario", new { area = "" }, new { })</li>
-                                <li>@Html.ActionLink(etiquetas["Permisos"].ToString(), "Index", "Permiso", new { area = "" }, new { })</li>
-                                <li>@Html.ActionLink(etiquetas["Resguardo"].ToString(), "Index", "Resguardo", new { area = "" }, new { })</li>
-                                <li>@Html.ActionLink(etiquetas["Bitacora"].ToString(), "Index", "Bitacora", new { area = "" }, new { })</li>
-                                <li>@Html.ActionLink(etiquetas["Integridad"].ToString(), "Index", "Integridad", new { area = "" }, new { })</li>
-                                <li>@Html.ActionLink(etiquetas["Idiomas"].ToString(), "Index", "Idioma", new { area = "" }, new { })</li>
-                            </ul>
-                        </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reglas <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Reglas", "Index", "Regla", new { area = "" }, new { })</li>
+                                        <li>@Html.ActionLink("Condiciones", "Index", "Condicion", new { area = "" }, new { })</li>
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Marketing <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Promociones", "Index", "Regla", new { area = "" }, new { })</li>
+                                        <li>@Html.ActionLink("Segmentación", "Index", "Regla", new { area = "" }, new { })</li>
+                                        <li>@Html.ActionLink("Publicidades", "Index", "Regla", new { area = "" }, new { })</li>
+
+                                    </ul>
+                                </li>
                             }
 
                     
