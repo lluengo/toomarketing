@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ACCESO.cs" />
+    <Compile Include="DAL_Accion.cs" />
+    <Compile Include="DAL_Regla.cs" />
     <Compile Include="DAL_Condicion.cs" />
     <Compile Include="Exceptions\DvhException.cs" />
     <Compile Include="MAPPER.cs" />

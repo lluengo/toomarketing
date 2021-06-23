@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="Accion.cs" />
     <Compile Include="Bitacora.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Componente.cs" />
     <Compile Include="Condicion.cs" />
@@ -61,6 +60,7 @@
     <Compile Include="Patente.cs" />
     <Compile Include="Permiso.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Regla.cs" />
     <Compile Include="Resguardo.cs" />
     <Compile Include="TipoAccion.cs" />
     <Compile Include="Operacion.cs" />

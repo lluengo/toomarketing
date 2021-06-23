@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="AbstractBLL.cs" />
     <Compile Include="BitacoraBLL.cs" />
+    <Compile Include="BLL_Accion.cs" />
     <Compile Include="BLL_Cliente.cs" />
     <Compile Include="BLL_Condicion.cs" />
     <Compile Include="Exceptions\DvhException.cs" />
