@@ -1,0 +1,66 @@
+﻿@model BE.Condicion
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<h2>@etiquetas["Eliminar"].ToString()</h2>
+
+
+<div>
+    <h4>@etiquetas["Condiciones"].ToString()</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @etiquetas["Entidad"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.entidad)
+        </dd>
+
+        <dt>
+            @etiquetas["Atributo"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.atributo)
+        </dd>
+
+        <dt>
+            @etiquetas["Operacion"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.operacion)
+        </dd>
+
+        <dt>
+            @etiquetas["Valor"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.valor)
+        </dd>
+
+        <dt>
+            @etiquetas["TipoValor"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipoValor)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@etiquetas["Eliminar"].ToString() class="btn btn-default" /> |
+            @Html.ActionLink(etiquetas["Volver"].ToString(), "Index")
+        </div>
+    }
+</div>

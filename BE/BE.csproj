@@ -42,19 +42,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accion.cs" />
     <Compile Include="Bitacora.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Componente.cs" />
+    <Compile Include="Condicion.cs" />
+    <Compile Include="Entidad.cs" />
     <Compile Include="Etiqueta.cs" />
     <Compile Include="Familia.cs" />
     <Compile Include="Idioma.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Patente.cs" />
     <Compile Include="Permiso.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resguardo.cs" />
+    <Compile Include="TipoAccion.cs" />
+    <Compile Include="Operacion.cs" />
     <Compile Include="TipoLog.cs" />
+    <Compile Include="TipoValor.cs" />
     <Compile Include="Usuario.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\BE.dll" />
+    <Content Include="bin\Debug\BE.pdb" />
+    <Content Include="bin\Release\BE.dll" />
+    <Content Include="bin\Release\BE.pdb" />
+    <Content Include="obj\Debug\BE.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\BE.dll" />
+    <Content Include="obj\Debug\BE.pdb" />
+    <Content Include="obj\Release\BE.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Release\BE.dll" />
+    <Content Include="obj\Release\BE.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Debug\BE.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\BE.csprojResolveAssemblyReference.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Release\BE.csprojResolveAssemblyReference.cache" />
+    <None Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="obj\Release\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,59 @@
+﻿@model BE.Condicion
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<h2>@etiquetas["Detalle"].ToString()</h2>
+
+<div>
+    <h4>@etiquetas["Condiciones"].ToString()</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @etiquetas["Entidad"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.entidad)
+        </dd>
+
+        <dt>
+            @etiquetas["Atributo"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.atributo)
+        </dd>
+
+        <dt>
+            @etiquetas["Operacion"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.operacion)
+        </dd>
+
+        <dt>
+            @etiquetas["Valor"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.valor)
+        </dd>
+
+        <dt>
+            @etiquetas["TipoValor"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipoValor)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(etiquetas["Editar"].ToString(), "Edit", new { id = Model.id }) |
+    @Html.ActionLink(etiquetas["Volver"].ToString(), "Index")
+</p>

@@ -65,15 +65,6 @@
             @Html.DisplayFor(modelItem => item.Direccion)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EsFumador)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActividadesRiesgo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Zona.Descripcion)
-        </td>
-        <td>
             @Html.ActionLink(etiquetas["Editar"].ToString(), "Edit", new { id=item.Id }) |
             @Html.ActionLink(etiquetas["Detalle"].ToString(), "Details", new { id=item.Id }) |
             @Html.ActionLink(etiquetas["Eliminar"].ToString(), "Delete", new { id=item.Id })

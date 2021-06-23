@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class ClienteBLL: AbstractBLL<Cliente>
+    public class BLL_Cliente : AbstractBLL<Cliente>
     {
         private MP_Cliente mp = new MP_Cliente();
 

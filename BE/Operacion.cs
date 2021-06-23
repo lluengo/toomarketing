@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL
+namespace BE
 {
-    public class Class1
+    public enum Operacion
     {
+        Contiene,
+        NoContiene,
+        EsIgual,
+        NoEsIgual
     }
 }

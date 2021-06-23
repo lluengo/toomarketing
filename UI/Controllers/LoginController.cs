@@ -17,7 +17,7 @@ namespace UI.Controllers
         UsuarioBLL bllUsuario = new UsuarioBLL();
         PermisoBLL bllPermiso = new PermisoBLL();
         IdiomaBLL bllIdioma = new IdiomaBLL();
-        ClienteBLL clienteBLL = new ClienteBLL();
+        BLL_Cliente clienteBLL = new BLL_Cliente();
 
         // GET: Login
 

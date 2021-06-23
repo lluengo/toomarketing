@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ACCESO.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="DAL_Condicion.cs" />
     <Compile Include="Exceptions\DvhException.cs" />
     <Compile Include="MAPPER.cs" />
     <Compile Include="MP_Bitacora.cs" />
