@@ -62,6 +62,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Regla.cs" />
     <Compile Include="Resguardo.cs" />
+    <Compile Include="Segmento.cs" />
     <Compile Include="TipoAccion.cs" />
     <Compile Include="Operacion.cs" />
     <Compile Include="TipoLog.cs" />

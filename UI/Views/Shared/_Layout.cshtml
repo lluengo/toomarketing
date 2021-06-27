@@ -86,7 +86,7 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Marketing <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li>@Html.ActionLink("Promociones", "Index", "Regla", new { area = "" }, new { })</li>
-                                        <li>@Html.ActionLink("Segmentación", "Index", "Regla", new { area = "" }, new { })</li>
+                                        <li>@Html.ActionLink("Segmentación", "Index", "Segmento", new { area = "" }, new { })</li>
                                         <li>@Html.ActionLink("Publicidades", "Index", "Regla", new { area = "" }, new { })</li>
 
                                     </ul>
@@ -130,7 +130,7 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer style="position:absolute; bottom:20px;">
             <p>&copy; @DateTime.Now.Year - TFI - Leonel Luengo</p>
         </footer>
     </div>

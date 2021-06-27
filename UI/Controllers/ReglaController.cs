@@ -1,48 +1,146 @@
 ﻿using BE;
 using BLL;
-using BLL.Exceptions;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UI.Models;
+using UI.Reportes;
+using UI.Excel;
 
 namespace UI.Controllers
 {
     public class ReglaController : GenericController
     {
-        private const string ROLES = "Administrador";
+        private const string ROLES = "Datos";
 
-        private Dictionary<string, string> idiomas_disponibles = new Dictionary<string, string>() {
-            { "Chino", "zh" },
-            { "Holandés", "nl" },
-            { "Inglés", "en" },
-            { "Francés", "fr" },
-            { "Alemán", "de" },
-            { "Griego", "el" },
-            { "Húngaro", "hu" },
-            { "Italiano", "it" },
-            { "Latín", "la" },
-            { "Noruego", "no" },
-            { "Polaco", "pl" },
-            { "Portugués", "pt" },
-            { "Ruso", "ru" },
-            { "Sueco", "sv" },
-            { "Tailandés", "th" },
-        };
+        private BLL_Regla reglaBll = new BLL_Regla();
 
-        private IdiomaBLL idiomaBll = new IdiomaBLL();
+        private BLL_Condicion condicionBll = new BLL_Condicion();
 
-        // GET: Idioma
-        public ActionResult Index()
+        private BLL_Accion accionBll = new BLL_Accion();
+
+        private UsuarioBLL usuarioBll = new UsuarioBLL();
+
+        // GET: Regla
+        public ActionResult Index(int? page)
         {
             if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
-                return View(@"~\Views\Shared\AccessDenied.cshtml"); 
+                return View(@"~\Views\Shared\AccessDenied.cshtml");
+            // return View(clienteBll.Listar());
+            IEnumerable<Regla> reglaes = reglaBll.Listar();
 
-            var lista = idiomaBll.ListarIdiomas();
-            return View(lista);
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(reglaes.ToPagedList(pageNumber, pageSize));
         }
 
-    
+        // GET: Regla/Details/5
+        public ActionResult Details(int id)
+        {
+            if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
+                return View(@"~\Views\Shared\AccessDenied.cshtml");
+
+            return View(reglaBll.Listar(id));
+        }
+
+        // GET: Regla/Create
+        public ActionResult Create()
+        {
+            if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
+                return View(@"~\Views\Shared\AccessDenied.cshtml");
+            
+            ViewBag.acciones = new SelectList(accionBll.Listar(),"id","nombre");  
+            ViewBag.condiciones = new SelectList(condicionBll.Listar(), "id", "nombre");
+
+            return View();
+        }
+
+        // POST: Regla/Create
+        [HttpPost]
+        public ActionResult Create(Regla regla)
+        {
+            if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
+                return View(@"~\Views\Shared\AccessDenied.cshtml");
+            try
+            {
+                reglaBll.Grabar(regla);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                ViewBag.mensaje = "Error";
+                return View();
+            }
+        }
+
+        // GET: Cliente/Edit/5
+        public ActionResult Edit(int id)
+        {
+            if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
+                return View(@"~\Views\Shared\AccessDenied.cshtml");
+
+            ViewBag.acciones = new SelectList(accionBll.Listar(), "id", "nombre");
+            ViewBag.condiciones = new SelectList(condicionBll.Listar(), "id", "nombre");
+
+            return View(reglaBll.Listar(id));
+        }
+
+        // POST: Cliente/Edit/5
+        [HttpPost]
+        public ActionResult Edit(Regla regla)
+        {
+            if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
+                return View(@"~\Views\Shared\AccessDenied.cshtml");
+            try
+            {
+                if (regla != null)
+                {
+
+                    reglaBll.Grabar(regla);
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.mensaje = "regla inexistente";
+                    return View(regla);
+                }
+            }
+            catch
+            {
+                ViewBag.mensaje = "Error";
+                return View();
+            }
+        }
+
+        // GET: Cliente/Delete/5
+        public ActionResult Delete(int id)
+        {
+            if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
+                return View(@"~\Views\Shared\AccessDenied.cshtml");
+            return View(reglaBll.Listar(id));
+        }
+
+        // POST: Vendedor/Delete/5
+        [HttpPost]
+        public ActionResult Delete(Regla regla)
+        {
+            if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
+                return View(@"~\Views\Shared\AccessDenied.cshtml");
+            try
+            {
+                reglaBll.Borrar(regla);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

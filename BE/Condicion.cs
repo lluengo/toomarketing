@@ -9,6 +9,7 @@ namespace BE
     public class Condicion
     {
         public int id { get; set; }
+        public String nombre { get; set; }
         public String atributo { get; set; }
         public String valor { get; set; }
         public Entidad entidad { get; set; }

@@ -1,4 +1,4 @@
-﻿@model BE.Accion
+﻿@model BE.Regla
 
 @{
     ViewBag.Title = "Edit";
@@ -16,7 +16,7 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>Acción</h4>
+    <h4>Condición</h4>
     <hr />
 
     <div class="form-group">
@@ -28,30 +28,31 @@
     </div>
 
     <div class="form-group">
-        @Html.Label(etiquetas["Numero"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label(etiquetas["Condicion"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.numero, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.numero, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.condicion.id, (IEnumerable<SelectListItem>)ViewBag.condiciones, "Seleccionar condición", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.condicion.id, "", new { @class = "text-danger" })
         </div>
     </div>
-
 
     <div class="form-group">
-        @Html.Label(etiquetas["TipoAccion"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label(etiquetas["Accion"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EnumDropDownListFor(model => model.tipoAccion)
-            @Html.ValidationMessageFor(model => model.tipoAccion, "", new { @class = "text-danger" })
-        </div>
-     </div>
-
-        <p style="color:red"> @ViewBag.mensaje</p>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value=@etiquetas["Guardar"].ToString() class="btn btn-default" />
-            </div>
+            @Html.DropDownListFor(model => model.accion.id, (IEnumerable<SelectListItem>)ViewBag.acciones, "Seleccionar acción", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.accion.id, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <p style="color:red"> @ViewBag.mensaje</p>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value=@etiquetas["Guardar"].ToString() class="btn btn-default" />
+        </div>
+    </div>
+
+
+</div>
 }
 
 <div>

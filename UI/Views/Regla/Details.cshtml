@@ -1,0 +1,43 @@
+﻿@model BE.Regla
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<h2>@etiquetas["Detalle"].ToString()</h2>
+
+<div>
+    <h4>@etiquetas["Condiciones"].ToString()</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @etiquetas["Nombre"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @etiquetas["Condicion"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.condicion.nombre)
+        </dd>
+
+        <dt>
+            @etiquetas["Accion"].ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.accion.nombre)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(etiquetas["Editar"].ToString(), "Edit", new { id = Model.id }) |
+    @Html.ActionLink(etiquetas["Volver"].ToString(), "Index")
+</p>

@@ -1,4 +1,4 @@
-﻿@model BE.Condicion
+﻿@model BE.Regla
 
 @{
     ViewBag.Title = "Create";
@@ -21,6 +21,8 @@
     <input type="hidden" value="" id="usuarioId" name="usuarioId" />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+
+
     <div class="form-group">
         @Html.Label(etiquetas["Nombre"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -30,42 +32,18 @@
     </div>
 
     <div class="form-group">
-        @Html.Label(etiquetas["Entidad"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label(etiquetas["Condicion"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EnumDropDownListFor(model => model.entidad)
-            @Html.ValidationMessageFor(model => model.entidad, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.condicion.id, (IEnumerable<SelectListItem>)ViewBag.condiciones,"Seleccionar condición", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.condicion, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.Label(etiquetas["Atributo"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label(etiquetas["Accion"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.atributo, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.atributo, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.Label(etiquetas["Operacion"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EnumDropDownListFor(model => model.operacion)
-            @Html.ValidationMessageFor(model => model.operacion, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.Label(etiquetas["Valor"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.valor, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.valor, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.Label(etiquetas["TipoValor"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EnumDropDownListFor(model => model.tipoValor)
-            @Html.ValidationMessageFor(model => model.tipoValor, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.accion.id, (IEnumerable<SelectListItem>)ViewBag.acciones,"Seleccionar acción", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.accion, "", new { @class = "text-danger" })
         </div>
     </div>
 

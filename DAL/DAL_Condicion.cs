@@ -37,6 +37,7 @@ namespace DAL
             parametros.Add(acceso.CrearParametro("@valor", objeto.valor));
             parametros.Add(acceso.CrearParametro("@entidad", objeto.entidad.ToString()));
             parametros.Add(acceso.CrearParametro("@tipoValor", objeto.tipoValor.ToString()));
+            parametros.Add(acceso.CrearParametro("@nombre", objeto.nombre));
             Abrir();
             int resultado = acceso.Escribir("Condicion_EDITAR", parametros);
             Cerrar();
@@ -51,6 +52,7 @@ namespace DAL
             parametros.Add(acceso.CrearParametro("@valor", objeto.valor));
             parametros.Add(acceso.CrearParametro("@entidad", objeto.entidad.ToString()));
             parametros.Add(acceso.CrearParametro("@tipoValor", objeto.tipoValor.ToString()));
+            parametros.Add(acceso.CrearParametro("@nombre", objeto.nombre));
             Abrir();
             int resultado = acceso.Escribir("Condicion_INSERTAR", parametros);
             Cerrar();
@@ -78,6 +80,7 @@ namespace DAL
                 c.valor = registro["Valor"].ToString();
                 c.entidad = (Entidad)Enum.Parse(typeof(Entidad), registro["Entidad"].ToString());
                 c.tipoValor = (TipoValor)Enum.Parse(typeof(TipoValor), registro["TipoValor"].ToString());
+                c.nombre = registro["Nombre"].ToString();
 
                 condiciones.Add(c);
             }
@@ -101,6 +104,7 @@ namespace DAL
                 c.valor = registro["Valor"].ToString();
                 c.entidad = (Entidad)Enum.Parse(typeof(Entidad), registro["Entidad"].ToString());
                 c.tipoValor = (TipoValor)Enum.Parse(typeof(TipoValor), registro["TipoValor"].ToString());
+                c.nombre = registro["Nombre"].ToString();
 
                 condiciones.Add(c);
             }

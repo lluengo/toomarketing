@@ -24,6 +24,9 @@
             ID
         </th>
         <th>
+            @etiquetas["Nombre"].ToString()
+        </th>
+        <th>
             @etiquetas["Entidad"].ToString()
         </th>
         <th>
@@ -46,6 +49,9 @@
 <tr>
     <td>
         @Html.DisplayFor(modelItem => item.id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.nombre)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.entidad)

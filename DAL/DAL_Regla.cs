@@ -67,7 +67,8 @@ namespace DAL
             foreach (DataRow registro in tabla.Rows)
             {
                 Regla r = new Regla();
-                r.id = int.Parse(registro["ID_Regla"].ToString()); 
+                r.id = int.Parse(registro["ID_Regla"].ToString());
+                r.nombre = registro["Nombre"].ToString();
                 r.condicion = (from Condicion c in condiciones
                                where c.id == int.Parse(registro["ID_Condicion"].ToString())
                                select c
@@ -82,7 +83,38 @@ namespace DAL
             return reglas;
         }
 
-        public Condicion Listar(int id)
+        public List<Regla> ListarReglasSegmentacion(int idSegmentacion)
+        {
+            Abrir();
+            DAL_Condicion dal_condicion = new DAL_Condicion(acceso);
+            List<Condicion> condiciones = dal_condicion.Listar();
+            DAL_Accion dal_accion = new DAL_Accion(acceso);
+            List<Accion> acciones = dal_accion.Listar();
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(acceso.CrearParametro("@id", idSegmentacion));
+            DataTable tabla = acceso.Leer("Segmento_LISTAR_REGLAS", parametros);
+            Cerrar();
+            List<Regla> reglas = new List<Regla>();
+            foreach (DataRow registro in tabla.Rows)
+            {
+                Regla r = new Regla();
+                r.id = int.Parse(registro["ID_Regla"].ToString());
+                r.nombre = registro["Nombre"].ToString();
+                r.condicion = (from Condicion c in condiciones
+                               where c.id == int.Parse(registro["ID_Condicion"].ToString())
+                               select c
+                               ).First();
+                r.accion = (from Accion a in acciones
+                            where a.id == int.Parse(registro["ID_Accion"].ToString())
+                            select a
+                        ).First();
+
+                reglas.Add(r);
+            }
+            return reglas;
+        }
+
+        public Regla Listar(int id)
         {
             Abrir();
             List<SqlParameter> parametros = new List<SqlParameter>();
@@ -98,6 +130,7 @@ namespace DAL
             {
                 Regla r = new Regla();
                 r.id = int.Parse(registro["ID_Regla"].ToString());
+                r.nombre = registro["Nombre"].ToString();
                 r.condicion = (from Condicion c in condiciones
                                where c.id == int.Parse(registro["ID_Condicion"].ToString())
                                select c
@@ -109,7 +142,7 @@ namespace DAL
 
                 reglas.Add(r);
             }
-            return condiciones[0];
+            return reglas[0];
         }
     }
 }

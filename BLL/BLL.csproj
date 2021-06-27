@@ -46,6 +46,8 @@
     <Compile Include="BitacoraBLL.cs" />
     <Compile Include="BLL_Accion.cs" />
     <Compile Include="BLL_Cliente.cs" />
+    <Compile Include="BLL_Segmento.cs" />
+    <Compile Include="BLL_Regla.cs" />
     <Compile Include="BLL_Condicion.cs" />
     <Compile Include="Exceptions\DvhException.cs" />
     <Compile Include="Exceptions\DvvException.cs" />

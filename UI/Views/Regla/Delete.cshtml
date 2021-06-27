@@ -1,4 +1,4 @@
-﻿@model BE.Accion
+﻿@model BE.Regla
 
 @{
     ViewBag.Title = "Delete";
@@ -22,19 +22,19 @@
         </dd>
 
         <dt>
-            @etiquetas["Numero"].ToString()
+            @etiquetas["Condicion"].ToString()
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.numero)
+            @Html.DisplayFor(model => model.condicion)
         </dd>
 
         <dt>
-            @etiquetas["TipoAccion"].ToString()
+            @etiquetas["Accion"].ToString()
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.tipoAccion)
+            @Html.DisplayFor(model => model.accion)
         </dd>
     </dl>
 

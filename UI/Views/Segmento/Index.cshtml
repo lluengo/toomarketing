@@ -1,5 +1,5 @@
 ﻿@using PagedList.Mvc;
-@model PagedList.IPagedList<BE.Regla>
+@model PagedList.IPagedList<BE.Segmento>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -9,7 +9,7 @@
     var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
 }
 
-<h2>@etiquetas["Reglas"].ToString()</h2>
+<h2>@etiquetas["Acciones"].ToString()</h2>
 
 <p>
     @Html.ActionLink(etiquetas["Crear"].ToString(), "Create")
@@ -27,11 +27,9 @@
             @etiquetas["Nombre"].ToString()
         </th>
         <th>
-            @etiquetas["Condicion"].ToString()
+            @etiquetas["Descripcion"].ToString()
         </th>
-        <th>
-            @etiquetas["Accion"].ToString()
-        </th>
+     
         <th></th>
     </tr>
 
@@ -45,11 +43,9 @@
         @Html.DisplayFor(modelItem => item.nombre)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.condicion.nombre)
+        @Html.DisplayFor(modelItem => item.descripcion)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.accion.nombre)
-    </td>
+ 
     <td>
         @Html.ActionLink(etiquetas["Editar"].ToString(), "Edit", new { id = item.id }) |
         @Html.ActionLink(etiquetas["Detalle"].ToString(), "Details", new { id = item.id }) |

@@ -44,6 +44,7 @@
     <Compile Include="DAL_Accion.cs" />
     <Compile Include="DAL_Regla.cs" />
     <Compile Include="DAL_Condicion.cs" />
+    <Compile Include="DAL_Segmento.cs" />
     <Compile Include="Exceptions\DvhException.cs" />
     <Compile Include="MAPPER.cs" />
     <Compile Include="MP_Bitacora.cs" />

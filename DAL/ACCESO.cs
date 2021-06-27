@@ -194,9 +194,5 @@ namespace DAL
             return dr;
 
         }
-
-
-
-
     }
 }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class Regla
+    public class Segmento
     {
         public int id { get; set; }
+        public String descripcion { get; set; }
         public String nombre { get; set; }
-        public Condicion condicion { get; set; }
-        public Accion accion { get; set; }
+        public List<Regla> reglas { get; set; }
     }
 }
