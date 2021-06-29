@@ -1,4 +1,4 @@
-﻿@model BE.Cliente
+﻿@model BE.Mensaje
 
 @{
     ViewBag.Title = "Delete";
@@ -10,7 +10,7 @@
 
 
 <div>
-    <h4>@etiquetas["Clientes"].ToString()</h4>
+    <h4>Template</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -18,52 +18,44 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Nombre)
+            @Html.DisplayFor(model => model.nombre)
         </dd>
 
         <dt>
-            @etiquetas["Apellido"].ToString()
+            String 1
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Apellido)
+            @Html.DisplayFor(model => model.string1)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Dni)
+            String 2
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Dni)
+            @Html.DisplayFor(model => model.string2)
         </dd>
 
         <dt>
-            @etiquetas["Fecha_Nacimiento"].ToString()
+            String 3
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FechaNacimiento)
+            @Html.DisplayFor(model => model.string3)
         </dd>
 
         <dt>
-            @etiquetas["Direccion"].ToString()
+            String 4
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Direccion)
+            @Html.DisplayFor(model => model.string4)
         </dd>
-        <dt>
-            @etiquetas["Usuario"].ToString()
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Usuario.usuario)
-        </dd>
-
-
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

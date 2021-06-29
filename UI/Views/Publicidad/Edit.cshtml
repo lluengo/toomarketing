@@ -1,0 +1,140 @@
+﻿@model BE.Segmento
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+    var idSegmento = Model.id;
+    var reglasDeSegmento = Model.reglas;
+
+}
+
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/autocomplete.css" rel="stylesheet" />
+
+<h2>Editar</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <input type="hidden" value=@idSegmento id="idSegmento" name="idSegmento" />
+
+    @Html.HiddenFor(model => model.id, new { htmlAttributes = new { @class = "form-control", id = "idSegmento" } })
+
+    <div class="form-group">
+        @Html.Label(etiquetas["Nombre"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", id = "nombre" } })
+            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label(etiquetas["Descripcion"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control", id = "descripcion" } })
+            @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label(etiquetas["Descripcion"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <table id ="reglas" class="table table-bordered table-responsive table-hover">
+                @foreach (var item in ViewBag.reglas)
+                {
+
+                    <tr>
+                        <td>
+                            @item.id
+                        </td>
+                        <td>
+                            @item.nombre
+                        </td>
+                        <td>
+                            @item.condicion.nombre
+                        </td>
+                        <td>
+                            @item.accion.nombre
+                        </td>
+                        <td>
+                            <input type="checkbox" id="sub" class="checkBox" value="@item.id"
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+
+    <p style="color:red"> @ViewBag.mensaje</p>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" id="submit" value=@etiquetas["Guardar"].ToString() class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink(etiquetas["Volver"].ToString(), "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+
+
+        $(document).ready(function () {   
+
+            var reglas = @Html.Raw(Json.Encode(reglasDeSegmento));
+
+            $('#reglas tr').each(function () {
+                if (reglas.find(element => element.id == $(this).find("td:first").html())) {                  
+                    $(this).find("td:eq(4) input").prop('checked', true);
+                }                
+            });       
+        });
+
+        $("#submit").click(function () {
+            var selectedIDs = new Array();
+            $('input:checkbox.checkBox').each(function () {
+                if ($(this).prop('checked')) {
+                    selectedIDs.push($(this).val());
+                }
+            });
+
+            var obj = @Html.Raw(Json.Encode(Model));
+            var model = {}
+            model.id = $('#idSegmento').val();
+            model.nombre = $('#nombre').val();
+            model.descripcion = $('#descripcion').val();
+
+            var modelo = '{"id:"'+ model.id +' "nombre":' + model.nombre + ', "descripcion":' + model.descripcion + '}';
+
+             var data = JSON.stringify({
+                 'ids': selectedIDs,
+                 'segmento': model
+               });
+
+            var options = {};
+            options.url = "/segmento/edit";
+            options.type = "POST";
+            options.data = data;
+            options.contentType = "application/json";
+            options.dataType = "json";
+            $.ajax(options);
+
+        });
+
+    </script>
+}

@@ -1,0 +1,72 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<BE.Mensaje>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+@{
+    ViewBag.Title = "Condiciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<h2>@etiquetas["Acciones"].ToString()</h2>
+
+<p>
+    @Html.ActionLink(etiquetas["Crear"].ToString(), "Create")
+    <div style="float:right;margin-top: -20px; padding-bottom: 5px;">
+        <button title="PDF" onclick="generarPdf();"><i class="fa fa-file-pdf-o" style="font-size:24px;color:red"></i></button>
+        <button title="Excel" onclick="generarExcel();"><i class="fa fa-file-excel-o" style="font-size:24px;color:green"></i></button>
+    </div>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            @etiquetas["Nombre"].ToString()
+        </th>
+        <th>
+            @etiquetas["Contenido"].ToString()
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.contenido)
+    </td>
+    <td>
+        @Html.ActionLink(etiquetas["Editar"].ToString(), "Edit", new { id = item.id }) |
+        @Html.ActionLink(etiquetas["Detalle"].ToString(), "Details", new { id = item.id }) |
+        @Html.ActionLink(etiquetas["Eliminar"].ToString(), "Delete", new { id = item.id })
+    </td>
+</tr>
+    }
+
+</table>
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+<script>
+    function generarPdf() {
+        window.open('/Cliente/Reporte', '_blank');
+    }
+
+    function generarExcel() {
+        location.href = '/Cliente/Excel';
+    }
+</script>
+
+}

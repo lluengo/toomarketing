@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var idUsuario = Model.Usuario.ID;
     var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
 }
 
@@ -21,7 +20,6 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
-        <input type="hidden" value=@idUsuario id="usuarioId" name="usuarioId" />
 
         <div class="form-group">
             @Html.Label(etiquetas["Nombre"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
@@ -62,41 +60,6 @@
                 @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.Label(etiquetas["Fumador"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.EsFumador)
-                    @Html.ValidationMessageFor(model => model.EsFumador, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(etiquetas["Riesgo"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.ActividadesRiesgo)
-                    @Html.ValidationMessageFor(model => model.ActividadesRiesgo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-2">@etiquetas["Zonas"].ToString()</label>
-            <div class="col-md-10">
-                @Html.DropDownList("zonaId", (IEnumerable<SelectListItem>)ViewBag.Zonas, new { @class = "form-control" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(etiquetas["Usuario"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Usuario.usuario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Usuario, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

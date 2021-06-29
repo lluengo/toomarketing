@@ -1,0 +1,157 @@
+﻿@model BE.Publicidad
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+    var userObj = Model;
+
+}
+
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/autocomplete.css" rel="stylesheet" />
+
+<h2>@etiquetas["Crear"].ToString()</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <input type="hidden" value="" id="usuarioId" name="usuarioId" />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.Label(etiquetas["Nombre"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", id = "nombre" } })
+            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label(etiquetas["Descripcion"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control", id = "descripcion" } })
+            @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label(etiquetas["FechaInicio"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } , id = "fechaInicio" })
+            @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label(etiquetas["FechaFin"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.fechaFin, new { htmlAttributes = new { @class = "form-control" , id = "fechaFin"} })
+            @Html.ValidationMessageFor(model => model.fechaFin, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.Label("Template", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.template.id, (IEnumerable<SelectListItem>)ViewBag.templates, "Seleccionar template", new { @class = "form-control" , id = "template"})
+            @Html.ValidationMessageFor(model => model.template.id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Mensajes", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.mensaje.id, (IEnumerable<SelectListItem>)ViewBag.mensajes, "Seleccionar mensaje", new { @class = "form-control" , id = "mensaje"})
+            @Html.ValidationMessageFor(model => model.mensaje, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.Label("Segmentos", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <table class="table table-bordered table-responsive table-hover">
+                @foreach (var item in ViewBag.segmentos)
+                {
+
+                    <tr>
+                        <td>
+                            @item.id
+                        </td>
+                        <td>
+                            @item.nombre
+                        </td>
+                        <td>
+                            @item.descripcion
+                        </td>
+                        <td>
+                            <input type="checkbox" id="sub" class="checkBox" value="@item.id"
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+
+    <p style="color:red"> @ViewBag.mensaje</p>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" id="submit" value=@etiquetas["Guardar"].ToString() class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink(etiquetas["Volver"].ToString(), "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $("#submit").click(function () {
+            var selectedIDs = new Array();
+            $('input:checkbox.checkBox').each(function () {
+                if ($(this).prop('checked')) {
+                    selectedIDs.push($(this).val());
+                }
+            });
+
+            var obj = @Html.Raw(Json.Encode(Model));
+            var model = {}
+            model.nombre = $('#nombre').val();
+            model.descripcion = $('#descripcion').val();
+            model.fechaInicio = $('#fechaInicio').val();
+            model.fechaFin = $('#fechaFin').val();
+
+            console.log(model);
+
+             var data = JSON.stringify({ 
+                 'ids': selectedIDs,
+                 'publicidad': model,
+                 'template': $('#template').val(),
+                 'mensaje': $('#mensaje').val(),
+               });
+
+            var options = {};
+            options.url = "/publicidad/create";
+            options.type = "POST";
+            options.data = data;
+            options.contentType = "application/json";
+            options.dataType = "json";           
+            $.ajax(options);
+
+        });
+    </script>
+}

@@ -59,40 +59,6 @@
                 @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.Label(etiquetas["Fumador"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.EsFumador)
-                    @Html.ValidationMessageFor(model => model.EsFumador, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(etiquetas["Riesgo"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.ActividadesRiesgo)
-                    @Html.ValidationMessageFor(model => model.ActividadesRiesgo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-2">@etiquetas["Zonas"].ToString()</label>
-            <div class="col-md-10">
-                @Html.DropDownList("zonaId", (IEnumerable<SelectListItem>)ViewBag.Zonas, new { @class = "form-control" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(etiquetas["Usuario"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBox("Usuario", ViewBag.CurrentFilter as string, new { @class = "form-control text-box single-line", autocomplete = "off", placeholder = "Usuario", style = "width:200px; display: inline-block;" })
-                @Html.ValidationMessageFor(model => model.Usuario, "", new { @class = "text-danger" })
-            </div>
-        </div>
         <p style="color:red"> @ViewBag.mensaje</p>
 
         <div class="form-group">

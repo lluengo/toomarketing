@@ -133,5 +133,30 @@ namespace DAL
 
             return segmentos[0];
         }
+
+        public List<Segmento> ListarSegmentosPublicidad(int idPublicidad)
+        {
+            Abrir();
+            DAL_Regla dalRegla = new DAL_Regla(acceso);
+            DAL_Accion dal_accion = new DAL_Accion(acceso);
+            List<Accion> acciones = dal_accion.Listar();
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(acceso.CrearParametro("@id", idPublicidad));
+            DataTable tabla = acceso.Leer("Publicidad_LISTAR_SEGMENTOS", parametros);
+            Cerrar();
+            List<Segmento> segmentos = new List<Segmento>();
+            foreach (DataRow registro in tabla.Rows)
+            {
+                Segmento s = new Segmento();
+                s.id = int.Parse(registro["ID_Segmento"].ToString());
+                s.nombre = registro["Nombre"].ToString();
+                s.descripcion = registro["Descripcion"].ToString();
+
+                s.reglas = dalRegla.ListarReglasSegmentacion(s.id);
+
+                segmentos.Add(s);
+            }
+            return segmentos;
+        }
     }
 }

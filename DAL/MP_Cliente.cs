@@ -39,7 +39,6 @@ namespace DAL
             parametros.Add(acceso.CrearParametro("@dni", objeto.Dni));
             parametros.Add(acceso.CrearParametro("@nombre", objeto.Nombre));
             parametros.Add(acceso.CrearParametro("@apellido", objeto.Apellido));
-            parametros.Add(acceso.CrearParametro("@usuarioId", objeto.Usuario.ID));
             parametros.Add(acceso.CrearParametro("@direccion", objeto.Direccion));
             parametros.Add(acceso.CrearParametro("@fechaNacimiento", objeto.FechaNacimiento));
             Abrir();
@@ -81,7 +80,6 @@ namespace DAL
             parametros.Add(acceso.CrearParametro("@dni", objeto.Dni));
             parametros.Add(acceso.CrearParametro("@nombre", objeto.Nombre));
             parametros.Add(acceso.CrearParametro("@apellido", objeto.Apellido));
-            parametros.Add(acceso.CrearParametro("@usuarioId", objeto.Usuario.ID));
             parametros.Add(acceso.CrearParametro("@direccion", objeto.Direccion));
             parametros.Add(acceso.CrearParametro("@fechaNacimiento", objeto.FechaNacimiento));
             Abrir();
@@ -111,13 +109,6 @@ namespace DAL
                 c.Dni = long.Parse(registro["Dni"].ToString());
                 c.Direccion = registro["Direccion"].ToString();
                 c.FechaNacimiento = DateTime.Parse(registro["Fecha_Nacimiento"].ToString());
-
-                int usuarioId = int.Parse(registro["Usuario_id"].ToString());
-
-                c.Usuario = (from Usuario u in usuarios
-                             where u.ID == usuarioId
-                             select u
-                       ).First();
 
                 Clientes.Add(c);
             }
@@ -149,13 +140,6 @@ namespace DAL
             c.Dni = long.Parse(registro["Dni"].ToString());
             c.Direccion = registro["Direccion"].ToString();
             c.FechaNacimiento = DateTime.Parse(registro["Fecha_Nacimiento"].ToString());
-
-            int usuarioId = int.Parse(registro["Usuario_id"].ToString());
-
-            c.Usuario = (from Usuario u in usuarios
-                         where u.ID == usuarioId
-                         select u
-                   ).First();
 
              return c;
         }

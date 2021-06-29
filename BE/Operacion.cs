@@ -8,6 +8,8 @@ namespace BE
 {
     public enum Operacion
     {
+        MayorA,
+        MenorA,
         Contiene,
         NoContiene,
         EsIgual,

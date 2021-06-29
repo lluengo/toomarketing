@@ -9,31 +9,35 @@
         <br/>
         <section id="loginForm">
             <form action="/Login/Login" class="form-horizontal" method="post">
-                
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="UserName">Usuario</label>
-                    <div class="col-md-10">
-                        <input class="form-control" data-val="true" data-val-required="El campo Nombre de usuario es obligatorio." id="UserName" name="UserName" type="text" value="">
-                        <span class="field-validation-valid" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="Password">Contraseña</label>
-                    <div class="col-md-10">
-                        <input class="form-control" data-val="true" data-val-required="El campo Contraseña es obligatorio." id="Password" name="Password" type="password">
-                        <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Iniciar sesión" class="btn btn-default">
-                        @Html.ActionLink("Olvide mi contraseña", "OlvidoContrasena")
-                       
-                    </div>
-                </div>
-                <p style="font-weight:bold; color:red"> @ViewBag.mensaje</p>
-            </form>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <img src="~/images/logo.png" width="250" style="margin-left: 140px;" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="UserName">Usuario</label>
+                            <div class="col-md-10">
+                                <input class="form-control" data-val="true" data-val-required="El campo Nombre de usuario es obligatorio." id="UserName" name="UserName" type="text" value="">
+                                <span class="field-validation-valid" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="Password">Contraseña</label>
+                            <div class="col-md-10">
+                                <input class="form-control" data-val="true" data-val-required="El campo Contraseña es obligatorio." id="Password" name="Password" type="password">
+                                <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Iniciar sesión" class="btn btn-default"><br />
+                                @Html.ActionLink("Olvide mi contraseña", "OlvidoContrasena")
+
+                            </div>
+                        </div>
+                        <p style="font-weight:bold; color:red"> @ViewBag.mensaje</p>
+</form>
         </section>
         
     </div>

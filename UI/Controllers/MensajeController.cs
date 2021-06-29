@@ -12,37 +12,37 @@ using UI.Excel;
 
 namespace UI.Controllers
 {
-    public class ClienteController : GenericController
+    public class MensajeController : GenericController
     {
         private const string ROLES = "Datos";
 
-        private BLL_Cliente clienteBll = new BLL_Cliente();
+        private BLL_Mensaje mensajeBll = new BLL_Mensaje();
 
         private UsuarioBLL usuarioBll = new UsuarioBLL();
 
-        // GET: Cliente
+        // GET: mensaje
         public ActionResult Index(int? page)
         {
             if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
                 return View(@"~\Views\Shared\AccessDenied.cshtml");
-            // return View(clienteBll.Listar());
-            IEnumerable<Cliente> clientes =  clienteBll.Listar();
+
+            IEnumerable<Mensaje> mensajees = mensajeBll.Listar();
             
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-            return View(clientes.ToPagedList(pageNumber, pageSize));
+            return View(mensajees.ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: Cliente/Details/5
+        // GET: mensaje/Details/5
         public ActionResult Details(int id)
         {
             if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
                 return View(@"~\Views\Shared\AccessDenied.cshtml");
 
-            return View(clienteBll.Listar(id));
+            return View(mensajeBll.Listar(id));
         }
 
-        // GET: Cliente/Create
+        // GET: mensaje/Create
         public ActionResult Create()
         {
             if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
@@ -50,15 +50,15 @@ namespace UI.Controllers
             return View();
         }
 
-        // POST: Cliente/Create
+        // POST: mensaje/Create
         [HttpPost]
-        public ActionResult Create(Cliente cliente)
+        public ActionResult Create(Mensaje mensaje)
         {
             if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
                 return View(@"~\Views\Shared\AccessDenied.cshtml");
             try
             {
-                clienteBll.Grabar(cliente);
+                mensajeBll.Grabar(mensaje);
 
                 return RedirectToAction("Index");
             }
@@ -75,20 +75,29 @@ namespace UI.Controllers
             if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
                 return View(@"~\Views\Shared\AccessDenied.cshtml");
 
-            return View(clienteBll.Listar(id));
+            return View(mensajeBll.Listar(id));
         }
 
         // POST: Cliente/Edit/5
         [HttpPost]
-        public ActionResult Edit(Cliente cliente)
+        public ActionResult Edit(Mensaje mensaje)
         {
             if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
                 return View(@"~\Views\Shared\AccessDenied.cshtml");
             try
-            {             
-                clienteBll.Grabar(cliente);
+            {
+                if (mensaje != null)
+                {
 
-                return RedirectToAction("Index");
+                    mensajeBll.Grabar(mensaje);
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.mensaje = "mensaje inexistente";
+                    return View(mensaje);
+                }
             }
             catch
             {
@@ -102,52 +111,24 @@ namespace UI.Controllers
         {
             if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
                 return View(@"~\Views\Shared\AccessDenied.cshtml");
-            return View(clienteBll.Listar(id));
+            return View(mensajeBll.Listar(id));
         }
 
         // POST: Vendedor/Delete/5
         [HttpPost]
-        public ActionResult Delete(Cliente cliente)
+        public ActionResult Delete(Mensaje mensaje)
         {
             if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
                 return View(@"~\Views\Shared\AccessDenied.cshtml");
             try
             {
-                clienteBll.Borrar(cliente);
+                mensajeBll.Borrar(mensaje);
 
                 return RedirectToAction("Index");
             }
             catch
             {
                 return View();
-            }
-        }
-
-
-        public ActionResult Reporte()
-        {
-            if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
-                return View(@"~\Views\Shared\AccessDenied.cshtml");
-
-            ReporteCliente reporteCliente = new ReporteCliente();
-            List<Cliente> clientes = clienteBll.Listar();
-            byte[] abytes = reporteCliente.PrepareReport(clientes);
-            return File(abytes, "application/pdf");
-        }
-
-        public void Excel()
-        {
-            if (verificarPermiso(ROLES, (Usuario)Session["usuario"]))
-            {
-
-
-                ClienteExcel excel = new ClienteExcel();
-                Response.ClearContent();
-                Response.BinaryWrite(excel.Generate(clienteBll.Listar()));
-                Response.AddHeader("content-disposition", "attachment; filename=Clientes.xlsx");
-                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.Flush();
-                Response.End();
             }
         }
     }

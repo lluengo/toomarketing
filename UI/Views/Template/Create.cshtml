@@ -1,0 +1,179 @@
+﻿@model BE.Template
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/autocomplete.css" rel="stylesheet" />
+
+<style>
+    .modal-backdrop
+{
+    opacity:1 !important;
+}
+</style>
+
+<h2>@etiquetas["Crear"].ToString()</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Template</h4>
+        <hr />
+        <input type="hidden" value="" id="usuarioId" name="usuarioId" />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.Label(etiquetas["Nombre"].ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("String 1", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.string1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.string1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("String 2", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.string2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.string2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("String 3", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.string3, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.string3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("String 4", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.string4, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.string4, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Template", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.nroTemplate, (IEnumerable<SelectListItem>)ViewBag.temp, "Seleccionar un template", new { @class = "form-control", id = "template" })
+                @Html.ValidationMessageFor(model => model.nroTemplate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <p style="color:red"> @ViewBag.mensaje</p>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value=@etiquetas["Guardar"].ToString() class="btn btn-default" />
+            </div>
+
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="vistaPrevia" value="Vista previa" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="dialogo1" >
+        <div class="modal-dialog modal-lg modal-dialog-centered" style="width:1024px;">
+            <div class="modal-content">
+
+                <!-- cabecera del diálogo -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Vista previa</h4>
+                    <button type="button" class="close" id="closeModal2" data-dismiss="modal">X</button>
+                </div>
+
+                <!-- cuerpo del diálogo -->
+                <div class="modal-body" id="body_modal">
+                    
+                </div>
+
+                <!-- pie del diálogo -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModal">Cerrar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink(etiquetas["Volver"].ToString(), "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script>
+
+        $("#closeModal").click(function () {
+            $("#body_modal").empty();
+        });
+
+         $("#closeModal2").click(function () {
+            $("#body_modal").empty();
+        });        
+
+        $("#vistaPrevia").click(function () {
+
+            var model = {}
+            model.nombre = $('#nombre').val();
+            model.string1 = $('#string1').val();
+            model.string2 = $('#string2').val();
+            model.string3 = $('#string3').val();
+            model.string4 = $('#string4').val();
+
+            var data = JSON.stringify({
+                'template': model,
+                'nroTemplate': $('#template').val()
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "/template/vistaprevia",
+                data: data,
+                contentType: "application/json",
+                dataType: "json",
+                success: function (response) {
+                    alert(response.responseText);
+
+                },
+                failure: function (response) {
+                    alert("failure");
+                },
+                error: function (response) {
+                    $("#dialogo1").modal("toggle");
+                    $("#body_modal").append('<code>' + response.responseText + '</code>');
+                }
+            });
+
+           
+
+
+
+
+
+        });
+
+    </script>
+}
