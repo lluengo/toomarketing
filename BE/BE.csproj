@@ -62,6 +62,7 @@
     <Compile Include="Bitacora.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Componente.cs" />
+    <Compile Include="Servicio.cs" />
     <Compile Include="Condicion.cs" />
     <Compile Include="Entidad.cs" />
     <Compile Include="Etiqueta.cs" />

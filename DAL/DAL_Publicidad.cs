@@ -135,16 +135,16 @@ namespace DAL
 
                 p.segmentos = dalSegmentos.ListarSegmentosPublicidad(p.id);
 
-                if (registro["ID_Template"] != null) { 
+                if (registro["ID_Template"] != DBNull.Value) { 
                 p.template = (from Template t in templates
                               where t.id == int.Parse(registro["ID_Template"].ToString())
                                select t
                           ).First();
                 }
 
-                if (registro["ID_Mensaje"] != null)
+                if (registro["ID_Mensaje"] != DBNull.Value)
                 {
-                    p.mensaje = (from Mensaje m in templates
+                    p.mensaje = (from Mensaje m in mensajes
                                   where m.id == int.Parse(registro["ID_Mensaje"].ToString())
                                   select m
                               ).First();

@@ -198,6 +198,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ServicioController.cs" />
     <Compile Include="Controllers\MensajeController.cs" />
     <Compile Include="Controllers\PublicidadController.cs" />
     <Compile Include="Controllers\TemplateController.cs" />
@@ -416,6 +417,11 @@
     <Content Include="Views\Publicidad\Details.cshtml" />
     <Content Include="Views\Publicidad\Edit.cshtml" />
     <Content Include="Views\Publicidad\Index.cshtml" />
+    <Content Include="Views\Servicio\Create.cshtml" />
+    <Content Include="Views\Servicio\Delete.cshtml" />
+    <Content Include="Views\Servicio\Details.cshtml" />
+    <Content Include="Views\Servicio\Edit.cshtml" />
+    <Content Include="Views\Servicio\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

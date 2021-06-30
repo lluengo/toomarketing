@@ -1,0 +1,54 @@
+﻿@model BE.Servicio
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var etiquetas = (Dictionary<object, object>)Session["EtiquetasIDIOMA"];
+}
+
+<h2>@etiquetas["Eliminar"].ToString()</h2>
+
+
+<div>
+    <h4>@etiquetas["Servicios"].ToString()</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @etiquetas["Nombre"].ToString()
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @etiquetas["Descripcion"].ToString()
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @etiquetas["Categoria"].ToString()
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.categoria)
+        </dd>
+
+        <dt>
+            @etiquetas["Precio"].ToString()
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.precio)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@etiquetas["Eliminar"].ToString() class="btn btn-default" /> |
+            @Html.ActionLink(etiquetas["Volver"].ToString(), "Index")
+        </div>
+    }
+</div>

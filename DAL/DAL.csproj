@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ACCESO.cs" />
+    <Compile Include="DAL_Servicio.cs" />
     <Compile Include="DAL_Mensaje.cs" />
     <Compile Include="DAL_Template.cs" />
     <Compile Include="DAL_Accion.cs" />

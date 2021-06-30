@@ -64,6 +64,7 @@
     <Compile Include="BitacoraBLL.cs" />
     <Compile Include="BLL_Accion.cs" />
     <Compile Include="BLL_Cliente.cs" />
+    <Compile Include="BLL_Servicio.cs" />
     <Compile Include="BLL_Mensaje.cs" />
     <Compile Include="BLL_Publicidad.cs" />
     <Compile Include="BLL_Template.cs" />
