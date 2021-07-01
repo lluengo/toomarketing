@@ -12,10 +12,10 @@ using System.Web.Script.Serialization;
 
 namespace BLL
 {
-    public class IdiomaBLL
+    public class BLL_Idioma
     {
 
-        private MP_Idioma mp = new MP_Idioma();
+        private DAL_Idioma mp = new DAL_Idioma();
 
         public List<Idioma> ListarIdiomas()
         {

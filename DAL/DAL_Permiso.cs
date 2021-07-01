@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class MP_Permiso : MAPPER<Permiso>
+    public class DAL_Permiso : MAPPER<Permiso>
     {
-        public MP_Permiso()
+        public DAL_Permiso()
         {
             acceso = new ACCESO();
             accesopropio = true;
         }
 
-        internal MP_Permiso(ACCESO ac)
+        internal DAL_Permiso(ACCESO ac)
         {
             acceso = ac;
             accesopropio = false;

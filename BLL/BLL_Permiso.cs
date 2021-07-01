@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class PermisoBLL : AbstractBLL<Permiso>
+    public class BLL_Permiso : AbstractBLL<Permiso>
     {
-        MP_Permiso mp = new MP_Permiso();
+        DAL_Permiso mp = new DAL_Permiso();
 
         public List<Componente> Listar(string familia)
         {

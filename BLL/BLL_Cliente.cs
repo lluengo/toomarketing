@@ -10,7 +10,7 @@ namespace BLL
 {
     public class BLL_Cliente : AbstractBLL<Cliente>
     {
-        private MP_Cliente mp = new MP_Cliente();
+        private DAL_Cliente mp = new DAL_Cliente();
 
         public override int Borrar(Cliente e)
         {

@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class MP_Usuario : MAPPER<Usuario>
+    public class DAL_Usuario : MAPPER<Usuario>
     {
-        public MP_Usuario()
+        public DAL_Usuario()
     {
         acceso = new ACCESO();
         accesopropio = true;
@@ -27,7 +27,7 @@ namespace DAL
                 Cerrar();
 
 
-                MP_Idioma mp_idioma = new MP_Idioma();
+                DAL_Idioma mp_idioma = new DAL_Idioma();
                 int dvv = 0;
                 foreach (DataRow registro in tabla.Rows)
                 {
@@ -63,7 +63,7 @@ namespace DAL
             }
         }
 
-        internal MP_Usuario(ACCESO ac)
+        internal DAL_Usuario(ACCESO ac)
     {
         acceso = ac;
         accesopropio = false;
@@ -141,7 +141,7 @@ namespace DAL
         Cerrar();
 
         List<Usuario> usuarios = new List<Usuario>();
-            MP_Idioma mp_idioma = new MP_Idioma();
+            DAL_Idioma mp_idioma = new DAL_Idioma();
             foreach (DataRow registro in tabla.Rows)
         {
                 Idioma idioma = new Idioma();
@@ -177,7 +177,7 @@ namespace DAL
             string digitoBase = registro["dvh"].ToString();
 
             Idioma idioma = new Idioma();
-            MP_Idioma mp_idioma = new MP_Idioma();
+            DAL_Idioma mp_idioma = new DAL_Idioma();
             idioma = mp_idioma.Listar(int.Parse(registro["ID_idioma"].ToString()));
 
             Usuario u = new Usuario(int.Parse(registro["ID_Usuario"].ToString()), registro["usuario"].ToString(), registro["estado"].ToString(), registro["nombre"].ToString(), registro["apellido"].ToString(), registro["correo"].ToString(), registro["dvh"].ToString(), idioma);
@@ -212,7 +212,7 @@ namespace DAL
                 u.correo = tabla.Rows[0]["correo"].ToString();
 
                 Idioma idioma = new Idioma();
-                MP_Idioma mp_idioma = new MP_Idioma();
+                DAL_Idioma mp_idioma = new DAL_Idioma();
                 idioma = mp_idioma.Listar(int.Parse(tabla.Rows[0]["ID_idioma"].ToString()));
                 u.idioma = idioma;
 
@@ -303,7 +303,7 @@ namespace DAL
             DataRow registro = tabla.Rows[0];
 
           Idioma idioma = new Idioma();
-           MP_Idioma mp_idioma = new MP_Idioma();
+           DAL_Idioma mp_idioma = new DAL_Idioma();
            idioma = mp_idioma.Listar(int.Parse(registro["ID_idioma"].ToString()));
 
             return new Usuario(int.Parse(registro["ID_Usuario"].ToString()), registro["usuario"].ToString(), registro["estado"].ToString(), registro["nombre"].ToString(), registro["apellido"].ToString(), registro["correo"].ToString(), registro["dvh"].ToString(), idioma);

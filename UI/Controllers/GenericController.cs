@@ -14,7 +14,7 @@ namespace UI.Controllers
         public Boolean verificarPermiso(string permiso, Usuario usuario)
         {
             bool estado = false;
-            PermisoBLL gestor_permisos = new PermisoBLL();
+            BLL_Permiso gestor_permisos = new BLL_Permiso();
 
             List<Permiso> permisos = new List<Permiso>();
             if (usuario == null)

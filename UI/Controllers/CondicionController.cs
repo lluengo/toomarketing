@@ -18,7 +18,7 @@ namespace UI.Controllers
 
         private BLL_Condicion condicionBll = new BLL_Condicion();
 
-        private UsuarioBLL usuarioBll = new UsuarioBLL();
+        private BLL_Usuario usuarioBll = new BLL_Usuario();
 
         // GET: Condicion
         public ActionResult Index(int? page)

@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class MP_Integridad
+    public class DAL_Integridad
     {
 
         private ACCESO acceso;
-        public MP_Integridad()
+        public DAL_Integridad()
         {
             acceso = new ACCESO();
             
         }
 
-        internal MP_Integridad(ACCESO ac)
+        internal DAL_Integridad(ACCESO ac)
         {
             acceso = ac;
             

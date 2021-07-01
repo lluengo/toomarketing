@@ -18,7 +18,7 @@ namespace UI.Controllers
 
         private BLL_Cliente clienteBll = new BLL_Cliente();
 
-        private UsuarioBLL usuarioBll = new UsuarioBLL();
+        private BLL_Usuario usuarioBll = new BLL_Usuario();
 
         // GET: Cliente
         public ActionResult Index(int? page)

@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class MP_Bitacora: MAPPER<Bitacora>
+    public class DAL_Bitacora: MAPPER<Bitacora>
     {
-        public MP_Bitacora()
+        public DAL_Bitacora()
         {
             acceso = new ACCESO();
             accesopropio = true;
         }
 
-        internal MP_Bitacora(ACCESO ac)
+        internal DAL_Bitacora(ACCESO ac)
         {
             acceso = ac;
             accesopropio = false;
@@ -53,7 +53,7 @@ namespace DAL
         { 
         Abrir();
 
-        MP_Usuario mp_usuario = new MP_Usuario(acceso);
+        DAL_Usuario mp_usuario = new DAL_Usuario(acceso);
 
         List<Usuario> usuarios = mp_usuario.Listar();
 

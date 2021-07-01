@@ -31,7 +31,7 @@ namespace UI.Controllers
             { "Tailandés", "th" },
         };
 
-        private IdiomaBLL idiomaBll = new IdiomaBLL();
+        private BLL_Idioma idiomaBll = new BLL_Idioma();
 
         // GET: Idioma
         public ActionResult Index()

@@ -14,9 +14,9 @@ namespace UI.Controllers
     public class LoginController : GenericController
     {
         private BitacoraBLL bitacoraBll = new BitacoraBLL();
-        UsuarioBLL bllUsuario = new UsuarioBLL();
-        PermisoBLL bllPermiso = new PermisoBLL();
-        IdiomaBLL bllIdioma = new IdiomaBLL();
+        BLL_Usuario bllUsuario = new BLL_Usuario();
+        BLL_Permiso bllPermiso = new BLL_Permiso();
+        BLL_Idioma bllIdioma = new BLL_Idioma();
         BLL_Cliente clienteBLL = new BLL_Cliente();
 
         // GET: Login
@@ -132,7 +132,7 @@ namespace UI.Controllers
         [HttpPost]
         public ActionResult OlvidoContrasena(Usuario user)
         {
-            UsuarioBLL usuarioBll = new UsuarioBLL();
+            BLL_Usuario usuarioBll = new BLL_Usuario();
             Usuario usuario = usuarioBll.Listar(user.usuario);
 
             if (usuario != null)

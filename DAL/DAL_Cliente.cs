@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class MP_Cliente : MAPPER<Cliente>
+    public class DAL_Cliente : MAPPER<Cliente>
     {
-        public MP_Cliente()
+        public DAL_Cliente()
         {
             acceso = new ACCESO();
             accesopropio = true;
         }
-        internal MP_Cliente(ACCESO ac)
+        internal DAL_Cliente(ACCESO ac)
         {
             acceso = ac;
             accesopropio = false;
@@ -91,7 +91,7 @@ namespace DAL
         public override List<Cliente> Listar()
         {
             Abrir();
-            MP_Usuario mp_usuario = new MP_Usuario(acceso);
+            DAL_Usuario mp_usuario = new DAL_Usuario(acceso);
 
             List<Usuario> usuarios = mp_usuario.Listar();
 
@@ -119,7 +119,7 @@ namespace DAL
         {
             Abrir();
 
-            MP_Usuario mp_usuario = new MP_Usuario(acceso);
+            DAL_Usuario mp_usuario = new DAL_Usuario(acceso);
 
             List<Usuario> usuarios = mp_usuario.Listar();
 

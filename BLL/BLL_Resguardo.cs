@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class ResguardoBLL : AbstractBLL<Resguardo>
+    public class BLL_Resguardo : AbstractBLL<Resguardo>
     {
-        MP_Resguardo mp = new MP_Resguardo();
+        DAL_Resguardo mp = new DAL_Resguardo();
         public override int Borrar(Resguardo objeto)
         {
             throw new NotImplementedException();

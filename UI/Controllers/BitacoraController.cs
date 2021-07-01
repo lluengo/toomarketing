@@ -17,7 +17,7 @@ namespace UI.Controllers
 
         private BitacoraBLL bll = new BitacoraBLL();
 
-        private UsuarioBLL usuarioBll = new UsuarioBLL();
+        private BLL_Usuario usuarioBll = new BLL_Usuario();
         
 
         public ActionResult Index(string currentFilter, string currentFilterFechaDesde, string currentFilterFechaHasta, string currentFilterMensaje, string filtroUsuario, int? page, string filtroFechaDesde, string filtroFechaHasta, string filtroMensaje)

@@ -14,7 +14,7 @@ namespace UI.Controllers
         // GET: Usuario
         private const string ROLES = "Administrador";
 
-        private UsuarioBLL bll = new UsuarioBLL();
+        private BLL_Usuario bll = new BLL_Usuario();
 
         public ActionResult Index(int? page)
         {
@@ -42,7 +42,7 @@ namespace UI.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
-            IdiomaBLL idiomaBll = new IdiomaBLL();
+            BLL_Idioma idiomaBll = new BLL_Idioma();
             ViewBag.Idiomas = new SelectList(idiomaBll.ListarIdiomas(), "Id", "Descripcion");
             return View();
         }
@@ -51,7 +51,7 @@ namespace UI.Controllers
         [HttpPost]
         public ActionResult Create(Usuario user, int Idioma)
         {
-            IdiomaBLL idiomaBll = new IdiomaBLL();
+            BLL_Idioma idiomaBll = new BLL_Idioma();
             Idioma i = idiomaBll.ListarIdioma(Idioma);
             user.idioma = i;
             try
@@ -87,7 +87,7 @@ namespace UI.Controllers
             if (!verificarPermiso(ROLES, (Usuario)Session["usuario"]))
                 return View(@"~\Views\Shared\AccessDenied.cshtml");
 
-            IdiomaBLL idiomaBll = new IdiomaBLL();
+            BLL_Idioma idiomaBll = new BLL_Idioma();
             ViewBag.Idiomas = new SelectList(idiomaBll.ListarIdiomas(), "Id", "Descripcion");
             return View(bll.Listar(id));
         }
@@ -163,7 +163,7 @@ namespace UI.Controllers
             if (result == 1)
             {
                 #region Idiomas
-                IdiomaBLL idiomaBll = new IdiomaBLL();
+                BLL_Idioma idiomaBll = new BLL_Idioma();
                 List<Etiqueta> etiquetas = new List<Etiqueta>();
                 etiquetas = idiomaBll.ListarEtiquetasPorIdioma(idiomaBll.ListarIdioma(usuario.idioma.Id).Descripcion);
                 Dictionary<object, object> list = new Dictionary<object, object>();

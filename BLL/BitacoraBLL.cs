@@ -11,7 +11,7 @@ namespace BLL
     public class BitacoraBLL
     {
 
-        private MP_Bitacora mp = new MP_Bitacora();
+        private DAL_Bitacora mp = new DAL_Bitacora();
         public List<Bitacora> Listar() {
             return mp.Listar();
         }

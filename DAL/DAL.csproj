@@ -67,13 +67,13 @@
     <Compile Include="DAL_Segmento.cs" />
     <Compile Include="Exceptions\DvhException.cs" />
     <Compile Include="MAPPER.cs" />
-    <Compile Include="MP_Bitacora.cs" />
-    <Compile Include="MP_Cliente.cs" />
-    <Compile Include="MP_Idioma.cs" />
-    <Compile Include="MP_Integridad.cs" />
-    <Compile Include="MP_Permiso.cs" />
-    <Compile Include="MP_Resguardo.cs" />
-    <Compile Include="MP_Usuario.cs" />
+    <Compile Include="DAL_Bitacora.cs" />
+    <Compile Include="DAL_Cliente.cs" />
+    <Compile Include="DAL_Idioma.cs" />
+    <Compile Include="DAL_Integridad.cs" />
+    <Compile Include="DAL_Permiso.cs" />
+    <Compile Include="DAL_Resguardo.cs" />
+    <Compile Include="DAL_Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

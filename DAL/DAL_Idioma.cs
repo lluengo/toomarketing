@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class MP_Idioma : MAPPER<Idioma>
+    public class DAL_Idioma : MAPPER<Idioma>
     {
-        public MP_Idioma()
+        public DAL_Idioma()
         {
             acceso = new ACCESO();
             accesopropio = true;
         }
 
-        internal MP_Idioma(ACCESO ac)
+        internal DAL_Idioma(ACCESO ac)
         {
             acceso = ac;
             accesopropio = false;

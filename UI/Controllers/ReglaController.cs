@@ -22,7 +22,7 @@ namespace UI.Controllers
 
         private BLL_Accion accionBll = new BLL_Accion();
 
-        private UsuarioBLL usuarioBll = new UsuarioBLL();
+        private BLL_Usuario usuarioBll = new BLL_Usuario();
 
         // GET: Regla
         public ActionResult Index(int? page)

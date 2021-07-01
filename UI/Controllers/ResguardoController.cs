@@ -14,7 +14,7 @@ namespace UI.Controllers
     {
         private const string ROLES = "Administrador";
 
-        private ResguardoBLL bll = new ResguardoBLL();
+        private BLL_Resguardo bll = new BLL_Resguardo();
         // lista los backups
         public ActionResult Index()
         {

@@ -58,7 +58,7 @@ namespace DAL
         public override List<Servicio> Listar()
         {
             Abrir();
-            MP_Usuario mp_usuario = new MP_Usuario(acceso);
+            DAL_Usuario mp_usuario = new DAL_Usuario(acceso);
 
             List<Usuario> usuarios = mp_usuario.Listar();
 

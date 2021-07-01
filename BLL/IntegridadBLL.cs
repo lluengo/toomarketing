@@ -9,7 +9,7 @@ namespace BLL
 {
     public class IntegridadBLL
     {
-        private MP_Usuario mpUsuario = new MP_Usuario();
+        private DAL_Usuario mpUsuario = new DAL_Usuario();
         public bool RecalcularDigitos()
         {
             return mpUsuario.RecalcularDigitos();

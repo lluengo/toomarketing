@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class UsuarioBLL : AbstractBLL<Usuario>
+    public class BLL_Usuario : AbstractBLL<Usuario>
     {
-        private DAL.MP_Usuario mp = new DAL.MP_Usuario();
+        private DAL.DAL_Usuario mp = new DAL.DAL_Usuario();
 
         public override int Borrar(Usuario objeto)
         {

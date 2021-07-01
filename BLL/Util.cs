@@ -11,7 +11,7 @@ namespace BLL
     {
         public Boolean verificarPermiso(string permiso, Usuario usuario)
         {
-            PermisoBLL permisoBLL = new PermisoBLL();
+            BLL_Permiso permisoBLL = new BLL_Permiso();
             List<Permiso> permisos = new List<Permiso>();
             if (usuario == null)
                 return false;

@@ -18,7 +18,7 @@ namespace UI.Controllers
 
         private BLL_Mensaje mensajeBll = new BLL_Mensaje();
 
-        private UsuarioBLL usuarioBll = new UsuarioBLL();
+        private BLL_Usuario usuarioBll = new BLL_Usuario();
 
         // GET: mensaje
         public ActionResult Index(int? page)

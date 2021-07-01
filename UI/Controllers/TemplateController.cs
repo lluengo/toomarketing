@@ -18,7 +18,7 @@ namespace UI.Controllers
 
         private BLL_Template templateBll = new BLL_Template();
 
-        private UsuarioBLL usuarioBll = new UsuarioBLL();
+        private BLL_Usuario usuarioBll = new BLL_Usuario();
 
         // GET: template
         public ActionResult Index(int? page)

@@ -13,7 +13,7 @@ namespace UI.Controllers
     {
         private const string ROLES = "Administrador";
 
-        PermisoBLL permisoBLL = new PermisoBLL();
+        BLL_Permiso permisoBLL = new BLL_Permiso();
         // GET: Permiso
         public ActionResult Index()
         {
@@ -212,7 +212,7 @@ namespace UI.Controllers
             foreach (Permiso permi in permisos_usuario)
                 permisos_todos.RemoveAll(r => r.ID == permi.ID);
 
-            UsuarioBLL usuarioBLL = new UsuarioBLL();
+            BLL_Usuario usuarioBLL = new BLL_Usuario();
             ViewData["usuario"] = usuarioBLL.Listar(id);
             ViewBag.lista_permisos = new SelectList(permisos_todos, "ID", "Nombre");
             return View(permisos_todos);
